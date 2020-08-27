@@ -1,0 +1,6 @@
+*.csproj
+Velocity/.vs/
+Velocity/Velocity.sln
+Velocity/Library/
+Velocity/obj/
+Velocity/Logs/
