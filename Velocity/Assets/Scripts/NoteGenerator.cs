@@ -29,17 +29,20 @@ public class NoteGenerator : MonoBehaviour
 
     void Update()
     {
-        string[] data = timeLineQueue.Peek().Split("/".ToCharArray()[0]);
-
-        if (float.Parse(data[0]) <= Time.time)
+        if(timeLineQueue.Count != 0)
         {
-            for(int loopCount = 1; loopCount < data.Length; loopCount++)
+            string[] data = timeLineQueue.Peek().Split("/".ToCharArray()[0]);
+
+            if (float.Parse(data[0]) <= Time.time)
             {
-                NotePool.Respawn(GeneratePos[int.Parse(data[loopCount])].position, Quaternion.identity);
-                //Instantiate(NotePrefab, GeneratePos[int.Parse(data[loopCount])]);
-                Debug.Log($"Generate note at {int.Parse(data[loopCount])}, Time : {Time.time}");
+                for (int loopCount = 1; loopCount < data.Length; loopCount++)
+                {
+                    NotePool.Respawn(GeneratePos[int.Parse(data[loopCount])].position, Quaternion.identity);
+                    //Instantiate(NotePrefab, GeneratePos[int.Parse(data[loopCount])]);
+                    Debug.Log($"Generate note at {int.Parse(data[loopCount])}, Time : {Time.time}");
+                }
+                timeLineQueue.Dequeue();
             }
-            timeLineQueue.Dequeue();
         }
         //Debug.Log(data[0]);
         //Debug.Log(Time.time);
