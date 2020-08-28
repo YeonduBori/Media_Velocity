@@ -12,7 +12,7 @@ public class NoteGenerator : MonoBehaviour
     Queue<string> timeLineQueue;
     private void Awake()
     {
-        NotePool = new MemoryPool(NotePrefab, 20, 50);
+        NotePool = new MemoryPool(NotePrefab, 20, 30);
 #if UNITY_EDITOR
         NoteData = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "test.txt"));
 #elif UNITY_ANDROID
@@ -32,11 +32,6 @@ public class NoteGenerator : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if(timeLineQueue.Count != 0)
@@ -48,14 +43,10 @@ public class NoteGenerator : MonoBehaviour
                 for (int loopCount = 1; loopCount < data.Length; loopCount++)
                 {
                     NotePool.Respawn(GeneratePos[int.Parse(data[loopCount])].position, Quaternion.identity);
-                    //Instantiate(NotePrefab, GeneratePos[int.Parse(data[loopCount])]);
                     Debug.Log($"Generate note at {int.Parse(data[loopCount])}, Time : {Time.time}");
                 }
                 timeLineQueue.Dequeue();
             }
         }
-        //Debug.Log(data[0]);
-        //Debug.Log(Time.time);
-        //if(data[0].Equals(Time.))
     }
 }

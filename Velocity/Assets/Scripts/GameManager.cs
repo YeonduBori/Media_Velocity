@@ -12,21 +12,24 @@ public class GameManager : Singleton<GameManager>
     public float Min;
     public float Max;
     public float ViewPortHeight;
-    public TextMeshProUGUI ScoreBoard;
-    public TextMeshProUGUI ComboBoard;
+    public Text ScoreBoard;
+    public Text ComboBoard;
 
+    public MemoryPool DespawnPool;
+    public GameObject despawnPrefab;
     public GameStatus gameStatus;
     // Start is called before the first frame update
     void Start()
     {
         gameStatus = GameStatus.OnGoing;
         StartCoroutine(heightChangeAsync());
+        DespawnPool = new MemoryPool(despawnPrefab, 20, 30);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ScoreBoard.text = $"Score : {TotalScore}";
+        ScoreBoard.text = $"점수 {TotalScore}";
 
         if (Combo != 0)
         {
@@ -46,5 +49,10 @@ public class GameManager : Singleton<GameManager>
             ViewPortHeight = Random.Range(Min, Max);
             yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0.0f;
     }
 }
