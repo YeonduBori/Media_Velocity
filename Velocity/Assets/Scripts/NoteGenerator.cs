@@ -13,15 +13,17 @@ public class NoteGenerator : MonoBehaviour
     private void Awake()
     {
         NotePool = new MemoryPool(NotePrefab, 20, 50);
-        
+#if UNITY_EDITOR
+        NoteData = File.ReadAllLines(Path.Combine(Application.streamingAssetsPath, "test.txt"));
+#elif UNITY_ANDROID
         WWW reader = new WWW(Path.Combine(Application.streamingAssetsPath, "test.txt"));
         while (!reader.isDone) { }
 
         string realPath = Application.persistentDataPath + "/db";
         File.WriteAllBytes(realPath, reader.bytes);
 
-        NoteData = NoteData = File.ReadAllLines(realPath);
-
+        NoteData = File.ReadAllLines(realPath);
+#endif
         timeLineQueue = new Queue<string>(NoteData.Length);
         foreach (var note in NoteData)
         {

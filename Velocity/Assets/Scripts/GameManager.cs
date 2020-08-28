@@ -9,13 +9,18 @@ public class GameManager : Singleton<GameManager>
     public int TotalScore;
     public int Combo;
 
+    public float Min;
+    public float Max;
+    public float ViewPortHeight;
     public TextMeshProUGUI ScoreBoard;
     public TextMeshProUGUI ComboBoard;
 
+    public GameStatus gameStatus;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameStatus = GameStatus.OnGoing;
+        StartCoroutine(heightChangeAsync());
     }
 
     // Update is called once per frame
@@ -32,5 +37,14 @@ public class GameManager : Singleton<GameManager>
             ComboBoard.text = "Break!!";
         }
 
+    }
+
+    private IEnumerator heightChangeAsync()
+    {
+        while (gameStatus.Equals(GameStatus.OnGoing))
+        {
+            ViewPortHeight = Random.Range(Min, Max);
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 }

@@ -51,14 +51,15 @@ public class Note : MonoBehaviour, IDespawnable
     {
         while (gameObject.activeSelf)
         {
-            buttonImage.fillAmount += 0.002f;
+            buttonImage.fillAmount += speed;
             if(buttonImage.fillAmount >= 1.0f)
             {
                 GameManager.instance.Combo = 0;
                 StopCoroutine(RotateButton());
                 OnDespawn(gameObject);
             }
-            yield return new WaitForEndOfFrame();
+
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }
