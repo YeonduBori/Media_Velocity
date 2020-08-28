@@ -13,7 +13,15 @@ public class NoteGenerator : MonoBehaviour
     private void Awake()
     {
         NotePool = new MemoryPool(NotePrefab, 20, 50);
-        NoteData = File.ReadAllLines(Application.streamingAssetsPath + "/test.txt");
+        
+        WWW reader = new WWW(Path.Combine(Application.streamingAssetsPath, "test.txt"));
+        while (!reader.isDone) { }
+
+        string realPath = Application.persistentDataPath + "/db";
+        File.WriteAllBytes(realPath, reader.bytes);
+
+        NoteData = NoteData = File.ReadAllLines(realPath);
+
         timeLineQueue = new Queue<string>(NoteData.Length);
         foreach (var note in NoteData)
         {
