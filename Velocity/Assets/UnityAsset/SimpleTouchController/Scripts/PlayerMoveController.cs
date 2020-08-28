@@ -39,8 +39,16 @@ public class PlayerMoveController : MonoBehaviour {
 	void Update()
 	{
 		// move
-		_rigidbody.MovePosition(transform.position + (transform.forward * leftController.GetTouchPosition.y * Time.deltaTime * speedMovements) +
-			(transform.right * leftController.GetTouchPosition.x * Time.deltaTime * speedMovements) );
+		_rigidbody.MovePosition(transform.position +
+			transform.right * leftController.GetTouchPosition.x * Time.deltaTime * speedMovements );
+        if(leftController.GetTouchPosition.x < 0.0f)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
 
 		//if(continuousRightController)
 		//{
