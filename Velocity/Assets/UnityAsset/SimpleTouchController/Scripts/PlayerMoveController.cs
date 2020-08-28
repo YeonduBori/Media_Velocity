@@ -10,8 +10,8 @@ public class PlayerMoveController : MonoBehaviour {
 	//public SimpleTouchController rightController;
 	public Transform headTrans;
 	public float speedMovements = 5f;
-	public float speedContinuousLook = 100f;
-	public float speedProgressiveLook = 3000f;
+	//public float speedContinuousLook = 100f;
+	//public float speedProgressiveLook = 3000f;
 
 	// PRIVATE
 	private Rigidbody2D _rigidbody;
