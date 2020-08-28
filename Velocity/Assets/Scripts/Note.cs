@@ -37,6 +37,7 @@ public class Note : MonoBehaviour, IDespawnable
     public void Despawn()
     {
         StopCoroutine(RotateButton());
+        GameManager.instance.TotalScore += score;
         OnDespawn(gameObject);
     }
 
