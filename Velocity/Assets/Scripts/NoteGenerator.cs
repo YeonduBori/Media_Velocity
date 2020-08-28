@@ -8,8 +8,11 @@ public class NoteGenerator : MonoBehaviour
     public string[] NoteData;
     public Transform[] GeneratePos;
     public GameObject NotePrefab;
+    public AudioSource MusicSource;
+
     MemoryPool NotePool;
     Queue<string> timeLineQueue;
+    float timeStamp;
     private void Awake()
     {
         NotePool = new MemoryPool(NotePrefab, 20, 30);
@@ -34,11 +37,13 @@ public class NoteGenerator : MonoBehaviour
 
     void Update()
     {
-        if(timeLineQueue.Count != 0)
+        if(timeLineQueue.Count != 0 && MusicSource.isPlaying)
         {
+            timeStamp = Time.time;
+            Debug.Log(timeStamp);
             string[] data = timeLineQueue.Peek().Split("/".ToCharArray()[0]);
 
-            if (float.Parse(data[0]) <= Time.time)
+            if (float.Parse(data[0]) <= Time.time - timeStamp)
             {
                 for (int loopCount = 1; loopCount < data.Length; loopCount++)
                 {
