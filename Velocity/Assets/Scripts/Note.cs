@@ -38,6 +38,7 @@ public class Note : MonoBehaviour, IDespawnable
     {
         StopCoroutine(RotateButton());
         GameManager.instance.TotalScore += score;
+        GameManager.instance.Combo += 1;
         OnDespawn(gameObject);
     }
 
@@ -51,6 +52,12 @@ public class Note : MonoBehaviour, IDespawnable
         while (gameObject.activeSelf)
         {
             buttonImage.fillAmount += 0.002f;
+            if(buttonImage.fillAmount >= 1.0f)
+            {
+                GameManager.instance.Combo = 0;
+                StopCoroutine(RotateButton());
+                OnDespawn(gameObject);
+            }
             yield return new WaitForEndOfFrame();
         }
     }
