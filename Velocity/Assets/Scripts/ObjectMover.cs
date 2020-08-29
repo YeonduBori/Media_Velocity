@@ -8,7 +8,7 @@ public class ObjectMover : MonoBehaviour
     Camera camera;
     float min;
     float max;
-
+    WaitForSeconds term = new WaitForSeconds(0.15f);
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,7 +33,7 @@ public class ObjectMover : MonoBehaviour
             float height = GameManager.instance.ViewPortHeight;
             transform.position 
                 = camera.ViewportToWorldPoint(new Vector3(1.0f/7.0f * Index, height, camera.nearClipPlane + 1));
-            yield return new WaitForSeconds(0.3f);
+            yield return term;
         }
     }
 }

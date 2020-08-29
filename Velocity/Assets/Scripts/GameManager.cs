@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     public MemoryPool DespawnPool;
     public GameObject despawnPrefab;
     public GameStatus gameStatus;
+    WaitForSeconds term = new WaitForSeconds(0.1f);
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +48,7 @@ public class GameManager : Singleton<GameManager>
         while (gameStatus.Equals(GameStatus.OnGoing))
         {
             ViewPortHeight = Random.Range(Min, Max);
-            yield return new WaitForSeconds(0.3f);
+            yield return term;
         }
     }
 

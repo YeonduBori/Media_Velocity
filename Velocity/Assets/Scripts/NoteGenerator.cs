@@ -36,6 +36,11 @@ public class NoteGenerator : MonoBehaviour
         timeStamp = Time.time;
     }
 
+    private void Start()
+    {
+        MusicSource.Play();
+    }
+
     void Update()
     {
         if(timeLineQueue.Count != 0)
@@ -44,13 +49,13 @@ public class NoteGenerator : MonoBehaviour
             string[] data = timeLineQueue.Peek().Split("/".ToCharArray()[0]);
             Debug.Log(float.Parse(data[0]));
             Debug.Log($"Time Stamp : {timeStamp}");
-            Debug.Log($"Calculate Stamp : {Time.time - timeStamp - 0.7f}");
-            if (float.Parse(data[0]) <= Time.time - timeStamp - 0.7f)
+            Debug.Log($"Calculate Stamp : {Time.time - timeStamp - 0.3f}");
+            if (float.Parse(data[0]) <= Time.time - timeStamp - 0.3f)
             {
                 for (int loopCount = 1; loopCount < data.Length; loopCount++)
                 {
                     NotePool.Respawn(GeneratePos[int.Parse(data[loopCount])].position, Quaternion.identity);
-                    Debug.Log($"Generate note at {int.Parse(data[loopCount])}, Time : {Time.time}");
+                    //Debug.Log($"Generate note at {int.Parse(data[loopCount])}, Time : {Time.time}");
                 }
                 timeLineQueue.Dequeue();
             }

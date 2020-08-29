@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 100
-  speed: 0.005
+  speed: 0.01
   button: {fileID: 1209494844794089183}
   canvas: {fileID: 8784509040492902010}
 --- !u!1 &1106061585428176212

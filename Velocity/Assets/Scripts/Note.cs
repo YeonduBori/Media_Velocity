@@ -11,7 +11,7 @@ public class Note : MonoBehaviour, IDespawnable
     [SerializeField] Button button;
     [SerializeField] Canvas canvas;
     Image buttonImage;
-
+    WaitForSeconds term = new WaitForSeconds(0.01f);
     public event Action<GameObject> OnDespawn;
 
     void Awake()
@@ -40,7 +40,7 @@ public class Note : MonoBehaviour, IDespawnable
             GameManager.instance.DespawnPool.Respawn(transform.position, Quaternion.identity);
             DesapwnObject.GetComponent<DespawnEffect>().status = DespawnStatus.Perfect;
         }
-        else if(buttonImage.fillAmount > 0.5f && buttonImage.fillAmount <= 0.75f)
+        else if(buttonImage.fillAmount > 0.25f && buttonImage.fillAmount <= 0.75f)
         {
             //Good
             weight = 1.5f;
@@ -74,7 +74,7 @@ public class Note : MonoBehaviour, IDespawnable
                 StopCoroutine(RotateButton());
                 OnDespawn(gameObject);
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return term;
         }
     }
 }
