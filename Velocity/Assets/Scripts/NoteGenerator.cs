@@ -33,17 +33,19 @@ public class NoteGenerator : MonoBehaviour
             //Debug.Log(note);
             timeLineQueue.Enqueue(note);
         }
+        timeStamp = Time.time;
     }
 
     void Update()
     {
-        if(timeLineQueue.Count != 0 && MusicSource.isPlaying)
+        if(timeLineQueue.Count != 0)
         {
-            timeStamp = Time.time;
-            Debug.Log(timeStamp);
+            //Debug.Log(timeStamp);
             string[] data = timeLineQueue.Peek().Split("/".ToCharArray()[0]);
-
-            if (float.Parse(data[0]) <= Time.time - timeStamp)
+            Debug.Log(float.Parse(data[0]));
+            Debug.Log($"Time Stamp : {timeStamp}");
+            Debug.Log($"Calculate Stamp : {Time.time - timeStamp - 0.7f}");
+            if (float.Parse(data[0]) <= Time.time - timeStamp - 0.7f)
             {
                 for (int loopCount = 1; loopCount < data.Length; loopCount++)
                 {

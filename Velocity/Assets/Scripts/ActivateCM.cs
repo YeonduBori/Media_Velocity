@@ -10,12 +10,12 @@ public class ActivateCM : MonoBehaviour
     [SerializeField]
     string tagName = "Player";
 
-    //public CharacterMove Player;
+    public PlayerMoveController Player;
 
     bool isPlayOnce = false;
 
 
-    void Start()
+    void Awake()
     {
         director.played += PlayerStopOn;
         director.stopped += PlayerStopOff;
@@ -39,11 +39,11 @@ public class ActivateCM : MonoBehaviour
             if (director.state.Equals(PlayState.Playing))
             {
                 Debug.Log("ON");
-                //Player.isPlayed = true;
+                Player.isPlayed = false;
             }
             else
             {
-                //Player.isPlayed = false;
+                Player.isPlayed = true;
             }
         }
 
@@ -51,11 +51,11 @@ public class ActivateCM : MonoBehaviour
 
     private void PlayerStopOn(PlayableDirector playable)
     {
-        //Player.isPlayed = true;
+        Player.isPlayed = false;
     }
 
     private void PlayerStopOff(PlayableDirector playable)
     {
-        //Player.isPlayed = false;
+        Player.isPlayed = true;
     }
 }

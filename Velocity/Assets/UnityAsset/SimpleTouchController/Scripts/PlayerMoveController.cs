@@ -10,16 +10,19 @@ public class PlayerMoveController : MonoBehaviour {
 	//public SimpleTouchController rightController;
 	public Transform headTrans;
 	public float speedMovements = 5f;
-	//public float speedContinuousLook = 100f;
-	//public float speedProgressiveLook = 3000f;
-
+    //public float speedContinuousLook = 100f;
+    //public float speedProgressiveLook = 3000f;
+    public bool isPlayed = false;
 	// PRIVATE
 	private Rigidbody2D _rigidbody;
-	//[SerializeField] bool continuousRightController = true;
-
+    //[SerializeField] bool continuousRightController = true;
+    Animator animator;
+    SpriteRenderer spriteRenderer;
 	void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 		//rightController.TouchEvent += RightController_TouchEvent;
 	}
 
@@ -38,18 +41,28 @@ public class PlayerMoveController : MonoBehaviour {
 
 	void Update()
 	{
-		// move
-		_rigidbody.MovePosition(transform.position +
-			transform.right * leftController.GetTouchPosition.x * Time.deltaTime * speedMovements );
-        if(leftController.GetTouchPosition.x < 0.0f)
+        animator.SetBool("isWalking", false);
+        if (isPlayed)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            leftController.gameObject.SetActive(true);
+            // move
+            _rigidbody.MovePosition(transform.position +
+                transform.right * leftController.GetTouchPosition.x * Time.deltaTime * speedMovements);
+            if (leftController.GetTouchPosition.x < 0.0f)
+            {
+                animator.SetBool("isWalking", true);
+                spriteRenderer.flipX = true;
+            }
+            else if(leftController.GetTouchPosition.x > 0.0f)
+            {
+                animator.SetBool("isWalking", true);
+                spriteRenderer.flipX = false;
+            }
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            leftController.gameObject.SetActive(false);
         }
-
 		//if(continuousRightController)
 		//{
 		//	UpdateAim(rightController.GetTouchPosition);
