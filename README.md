@@ -7,7 +7,7 @@
 - QA 및 시연영상 촬영, 편집
 - 게임 컨셉 설정 및 프로젝트 리딩</br>
 
-<b>디자인 : 이은경</b>(https://github.com/naaaaxx)</br>
+<b>디자인 : 이은경</b>(https://www.instagram.com/oxen00_/)</br>
 ### Contribution
 - 캐릭터 디자인 2종(상호, 피아니스트)
     - 캐릭터 애니메이션 Walking, Idle, Look Up, Down 작업
